@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Leadership Simulation Lab · Підготовка до сесії</title>
+<title>Leadership Decisions Lab · Підготовка до сесії</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap');
 
@@ -316,7 +316,7 @@ footer {
 <body>
 
 <header>
-  <div class="logo">Leadership Simulation Lab <span>· підготовка</span></div>
+  <div class="logo">Leadership Decisions Lab <span>· підготовка</span></div>
   <div class="progress-summary"><strong id="doneCount">0</strong> / <span id="totalCount">0</span> виконано</div>
 </header>
 
@@ -324,7 +324,7 @@ footer {
   <div class="intro">
     <div class="intro-label">Перед сесією · онлайн-формат</div>
     <h1>Підготуйтесь за 15 хвилин</h1>
-    <p>Якість симуляції залежить не від правил — а від середовища. Пройдіть цей список до початку сесії. Відмічайте виконані пункти.</p>
+    <p>Якість симуляції залежить не від правил, а від середовища. Пройдіть цей список до початку сесії. Відмічайте виконані пункти.</p>
   </div>
 
   <div class="progress-bar-wrap">
@@ -340,7 +340,7 @@ footer {
       <path d="M10 8v4M10 14.5v.5" stroke="#854F0B" stroke-width="1.5" stroke-linecap="round"/>
     </svg>
     <div class="warning-text">
-      <strong>Три обов'язкових пункти:</strong> навушники, окреме приміщення, відкладений телефон. Без них симуляція або зупиниться через технічні проблеми, або не дасть повного ефекту.
+      <strong>Три обов'язкові пункти:</strong> навушники, окреме приміщення, відкладений телефон. Без них симуляція або перериватиметься через технічні проблеми, або не дасть повного ефекту.
     </div>
   </div>
 
@@ -358,7 +358,7 @@ footer {
         </div>
         <div>
           <div class="section-title">Техніка і звук</div>
-          <div class="section-sub">Найчастіша причина зрупованих сесій</div>
+          <div class="section-sub">Найчастіша причина перерваних сесій</div>
         </div>
       </div>
       <div class="items">
@@ -366,7 +366,7 @@ footer {
           <div class="checkbox"><svg class="checkmark" width="12" height="10" viewBox="0 0 12 10"><path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
           <div class="item-body">
             <div class="item-title">Навушники підключені та перевірені</div>
-            <div class="item-desc">Обов'язково — і закриті, не відкриті вкладиші. Без навушників голос інших учасників повертається у мікрофон і створює ехо, яке робить розмову нечутною для всіх.</div>
+            <div class="item-desc">Без навушників голос інших учасників повертається у мікрофон і створює ехо, яке заважає усім учасникам зустрічі.</div>
           </div>
           <span class="critical-badge">критично</span>
         </div>
@@ -374,7 +374,7 @@ footer {
           <div class="checkbox"><svg class="checkmark" width="12" height="10" viewBox="0 0 12 10"><path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
           <div class="item-body">
             <div class="item-title">Мікрофон перевірено</div>
-            <div class="item-desc">Зробіть тестовий запис або зайдіть на meet.google.com/test. Перевірте, що вас чути чітко і без фону.</div>
+            <div class="item-desc">Зайдіть на meet.google.com та перевірте, що вас чути чітко і без фонового шуму.</div>
           </div>
         </div>
         <div class="item" onclick="toggle(this)" data-id="camera">
@@ -384,25 +384,11 @@ footer {
             <div class="item-desc">Симуляція вимагає видимості реакцій. Камера — обов'язкова умова для всіх учасників протягом усієї сесії, не тільки на початку.</div>
           </div>
         </div>
-        <div class="item" onclick="toggle(this)" data-id="internet">
-          <div class="checkbox"><svg class="checkmark" width="12" height="10" viewBox="0 0 12 10"><path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
-          <div class="item-body">
-            <div class="item-title">Стабільне інтернет-з'єднання</div>
-            <div class="item-desc">Провідне підключення краще за Wi-Fi. Якщо тільки Wi-Fi — сядьте якомога ближче до роутера. Мобільний інтернет як запасний варіант, не основний.</div>
-          </div>
-        </div>
-        <div class="item" onclick="toggle(this)" data-id="browser">
-          <div class="checkbox"><svg class="checkmark" width="12" height="10" viewBox="0 0 12 10"><path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
-          <div class="item-body">
-            <div class="item-title">Браузер оновлено, посилання перевірено</div>
-            <div class="item-desc">Chrome або Firefox — найстабільніші. Перейдіть за посиланням сесії заздалегідь і перевірте, що все відкривається. Не Safari на старих пристроях.</div>
-          </div>
-        </div>
         <div class="item" onclick="toggle(this)" data-id="power">
           <div class="checkbox"><svg class="checkmark" width="12" height="10" viewBox="0 0 12 10"><path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
           <div class="item-body">
             <div class="item-title">Ноутбук підключено до зарядки</div>
-            <div class="item-desc">Сесія триває 3–4 години. Відеодзвінок швидко розряджає батарею — підключіть зарядку до початку, не чекайте поки заряд впаде.</div>
+            <div class="item-desc">Сесія триває 3–4 години. Відеодзвінок швидко розряджає батарею — підключіть зарядку до початку, не чекайте, поки заряд впаде.</div>
           </div>
         </div>
       </div>
@@ -427,7 +413,7 @@ footer {
           <div class="checkbox"><svg class="checkmark" width="12" height="10" viewBox="0 0 12 10"><path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
           <div class="item-body">
             <div class="item-title">Окреме приміщення, двері зачинені</div>
-            <div class="item-desc">Вас не повинні чути і ви не повинні чути інших. Якщо живете з сім'єю або колегами — попередьте їх: "Я недоступний від X до Y, навіть якщо виглядає що просто сиджу за ноутом".</div>
+            <div class="item-desc">Вас не повинні чути, і ви не повинні чути інших. Якщо живете з сім'єю або колегами — попередьте їх: "Я недоступний від X до Y, навіть якщо виглядає що просто сиджу за ноутом".</div>
           </div>
           <span class="critical-badge">критично</span>
         </div>
@@ -435,7 +421,7 @@ footer {
           <div class="checkbox"><svg class="checkmark" width="12" height="10" viewBox="0 0 12 10"><path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
           <div class="item-body">
             <div class="item-title">Нормальне освітлення — обличчя видно чітко</div>
-            <div class="item-desc">Джерело світла попереду або збоку — не за спиною (не сидіть спиною до вікна). Якщо обличчя в тіні — фасилітатор не бачить ваших реакцій, що знижує якість дебрифу.</div>
+            <div class="item-desc">Якщо обличчя в тіні, фасилітатор не бачить ваших реакцій, що знижує якість дебрифу.</div>
           </div>
         </div>
         <div class="item" onclick="toggle(this)" data-id="background">
@@ -482,7 +468,7 @@ footer {
           <div class="checkbox"><svg class="checkmark" width="12" height="10" viewBox="0 0 12 10"><path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
           <div class="item-body">
             <div class="item-title">Телефон відкладено лицем вниз або в іншій кімнаті</div>
-            <div class="item-desc">Не просто беззвучний — відкладено фізично. Повідомлення що з'являється на екрані телефону відволікає на 20+ хвилин навіть якщо ви в нього не заходите. Це науково доведений факт.</div>
+            <div class="item-desc">Не просто беззвучний — відкладено фізично. Повідомлення, що з'являється на екрані телефону, відволікає на 20+ хвилин, навіть якщо ви в нього не заходите. Це науково доведений факт.</div>
           </div>
           <span class="critical-badge">критично</span>
         </div>
@@ -504,14 +490,14 @@ footer {
           <div class="checkbox"><svg class="checkmark" width="12" height="10" viewBox="0 0 12 10"><path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
           <div class="item-body">
             <div class="item-title">Час у календарі заблоковано з запасом</div>
-            <div class="item-desc">Заблокуйте +30 хвилин після запланованого закінчення. Сесія може затягнутись під час дебрифу — це нормально і означає що щось важливе відбувається.</div>
+            <div class="item-desc">Заблокуйте +30 хвилин після запланованого закінчення. Сесія може затягнутися під час дебрифінгу — це нормально і означає, що відбувається щось важливе.</div>
           </div>
         </div>
         <div class="item" onclick="toggle(this)" data-id="colleagues">
           <div class="checkbox"><svg class="checkmark" width="12" height="10" viewBox="0 0 12 10"><path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
           <div class="item-body">
             <div class="item-title">Колеги знають що ви недоступні</div>
-            <div class="item-desc">Поставте статус "Недоступний" у робочих чатах. Якщо очікуєте термінових питань — делегуйте хтось до початку сесії.</div>
+            <div class="item-desc">Поставте статус "Недоступний" у робочих чатах. Якщо очікуєте термінових питань — делегуйте комусь до початку сесії.</div>
           </div>
         </div>
       </div>
@@ -543,14 +529,14 @@ footer {
           <div class="checkbox"><svg class="checkmark" width="12" height="10" viewBox="0 0 12 10"><path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
           <div class="item-body">
             <div class="item-title">5 хвилин тиші перед початком</div>
-            <div class="item-desc">Не заходьте на сесію прямо з іншого дзвінку або зустрічі. Дайте собі 5 хвилин перемкнутись. Симуляція вимагає повної присутності — не "паралельного режиму".</div>
+            <div class="item-desc">Не заходьте на сесію прямо з іншого дзвінка або зустрічі. Дайте собі 5 хвилин, щоб перемкнутися. Симуляція вимагає повної присутності — не "паралельного режиму".</div>
           </div>
         </div>
         <div class="item" onclick="toggle(this)" data-id="expectations">
           <div class="checkbox"><svg class="checkmark" width="12" height="10" viewBox="0 0 12 10"><path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
           <div class="item-body">
             <div class="item-title">Немає очікування "правильних відповідей"</div>
-            <div class="item-desc">Тут немає правильного способу "зіграти добре". Чим відкритіше ви дієте — тим ціннішим буде дебриф. Ваша задача — не виграти, а діяти.</div>
+            <div class="item-desc">Тут немає правильного способу "зіграти добре". Чим відкритіше ви дієте, тим ціннішим буде дебриф. Ваша задача — не виграти, а діяти.</div>
           </div>
         </div>
       </div>
@@ -571,7 +557,7 @@ footer {
 
 </main>
 
-<footer>Leadership Simulation Lab · Олександр Тріфан · Конфіденційно</footer>
+<footer>Leadership Decisions Lab · Олександр Тріфан · Конфіденційно</footer>
 
 <script>
 const STORAGE_KEY = 'lsl_checklist_v1';
