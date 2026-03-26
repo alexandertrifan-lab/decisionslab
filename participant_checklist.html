@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leadership Simulation Lab · Підготовка до сесії</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --green:      #1D9E75;
+  --green-dark: #0F6E56;
+  --green-dim:  #E1F5EE;
+  --amber:      #EF9F27;
+  --amber-dim:  #FAEEDA;
+  --amber-dark: #854F0B;
+  --red:        #D85A30;
+  --red-dim:    #FAECE7;
+  --red-dark:   #993C1D;
+  --gray-900:   #1A1A1A;
+  --gray-700:   #444441;
+  --gray-500:   #5F5E5A;
+  --gray-300:   #B4B2A9;
+  --gray-100:   #F1EFE8;
+  --white:      #FFFFFF;
+  --bg:         #F7F5F0;
+}
+
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--gray-900);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+header {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  background: rgba(247,245,240,0.95);
+  backdrop-filter: blur(8px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1rem;
+  color: var(--green-dark);
+}
+.logo span {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 0.8rem;
+  color: var(--gray-300);
+  margin-left: 0.5rem;
+}
+.progress-summary {
+  font-size: 0.8rem;
+  color: var(--gray-500);
+}
+.progress-summary strong {
+  color: var(--green-dark);
+  font-weight: 500;
+}
+
+main {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 6rem;
+}
+
+.intro {
+  margin-bottom: 2.5rem;
+}
+.intro-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 0.5rem;
+}
+.intro h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.6rem, 5vw, 2.2rem);
+  line-height: 1.2;
+  color: var(--gray-900);
+  margin-bottom: 0.75rem;
+}
+.intro p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--gray-500);
+}
+
+.progress-bar-wrap {
+  margin-bottom: 2.5rem;
+}
+.progress-track {
+  height: 3px;
+  background: rgba(0,0,0,0.08);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--green);
+  border-radius: 3px;
+  transition: width 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.progress-text {
+  font-size: 0.75rem;
+  color: var(--gray-500);
+  text-align: right;
+}
+
+.section {
+  margin-bottom: 2rem;
+}
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 0.75rem;
+}
+.section-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+.section-title {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--gray-900);
+}
+.section-sub {
+  font-size: 0.78rem;
+  color: var(--gray-500);
+}
+
+.items { display: flex; flex-direction: column; gap: 6px; }
+
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--white);
+  border: 1.5px solid rgba(0,0,0,0.08);
+  border-radius: 14px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.item:hover { border-color: rgba(0,0,0,0.16); }
+.item.checked {
+  border-color: var(--green);
+  background: var(--green-dim);
+}
+.item.critical {
+  border-left: 3px solid var(--red);
+  border-radius: 0 14px 14px 3px;
+}
+.item.critical.checked {
+  border-left-color: var(--green);
+  border-color: var(--green);
+  background: var(--green-dim);
+}
+
+.checkbox {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 1.5px solid rgba(0,0,0,0.2);
+  flex-shrink: 0;
+  margin-top: 1px;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--white);
+}
+.item.checked .checkbox {
+  background: var(--green);
+  border-color: var(--green);
+}
+.checkmark {
+  opacity: 0;
+  transition: opacity 0.1s;
+}
+.item.checked .checkmark { opacity: 1; }
+
+.item-body { flex: 1; min-width: 0; }
+.item-title {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--gray-900);
+  line-height: 1.4;
+  margin-bottom: 2px;
+}
+.item.checked .item-title { color: var(--green-dark); }
+.item-desc {
+  font-size: 0.8rem;
+  color: var(--gray-500);
+  line-height: 1.5;
+}
+.item.checked .item-desc { color: var(--green-dark); opacity: 0.7; }
+
+.critical-badge {
+  font-size: 0.65rem;
+  font-weight: 500;
+  padding: 2px 7px;
+  border-radius: 100px;
+  background: var(--red-dim);
+  color: var(--red-dark);
+  white-space: nowrap;
+  flex-shrink: 0;
+  letter-spacing: 0.04em;
+  align-self: flex-start;
+  margin-top: 2px;
+}
+.item.checked .critical-badge {
+  background: var(--green-dim);
+  color: var(--green-dark);
+}
+
+.warning-box {
+  background: var(--amber-dim);
+  border: 1px solid rgba(239,159,39,0.3);
+  border-radius: 14px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 2rem;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.warning-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.warning-text {
+  font-size: 0.875rem;
+  color: var(--amber-dark);
+  line-height: 1.6;
+}
+.warning-text strong { font-weight: 500; }
+
+.done-state {
+  display: none;
+  text-align: center;
+  padding: 3rem 1rem;
+}
+.done-state.show { display: block; }
+.done-icon {
+  width: 64px;
+  height: 64px;
+  background: var(--green-dim);
+  border-radius: 50%;
+  margin: 0 auto 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.done-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.6rem;
+  color: var(--gray-900);
+  margin-bottom: 0.5rem;
+}
+.done-sub {
+  font-size: 0.9rem;
+  color: var(--gray-500);
+  line-height: 1.6;
+  max-width: 380px;
+  margin: 0 auto 1.5rem;
+}
+.done-reset {
+  font-size: 0.8rem;
+  color: var(--gray-500);
+  text-decoration: underline;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+}
+
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.7rem;
+  color: var(--gray-300);
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+@media (max-width: 480px) {
+  header { padding: 1rem 1.25rem; }
+  main { padding: 2rem 1rem 5rem; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Leadership Simulation Lab <span>· підготовка</span></div>
+  <div class="progress-summary"><strong id="doneCount">0</strong> / <span id="totalCount">0</span> виконано</div>
+</header>
+
+<main>
+  <div class="intro">
+    <div class="intro-label">Перед сесією · онлайн-формат</div>
+    <h1>Підготуйтесь за 15 хвилин</h1>
+    <p>Якість симуляції залежить не від правил — а від середовища. Пройдіть цей список до початку сесії. Відмічайте виконані пункти.</p>
+  </div>
+
+  <div class="progress-bar-wrap">
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill" style="width:0%"></div>
+    </div>
+    <div class="progress-text" id="progressText">0%</div>
+  </div>
+
+  <div class="warning-box">
+    <svg class="warning-icon" viewBox="0 0 20 20" fill="none">
+      <path d="M10 2L2 17h16L10 2z" stroke="#854F0B" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M10 8v4M10 14.5v.5" stroke="#854F0B" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    <div class="warning-text">
+      <strong>Три обов'язкових пункти:</strong> навушники, окреме приміщення, відкладений телефон. Без них симуляція або зупиниться через технічні проблеми, або не дасть повного ефекту.
+    </div>
+  </div>
+
+  <div id="checklist">
+
+    <!-- SECTION 1: ТЕХНІКА -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:#E1F5EE;">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <rect x="2" y="10" width="4" height="5" rx="2" stroke="#0F6E56" stroke-width="1.3"/>
+            <rect x="10" y="10" width="4" height="5" rx="2" stroke="#0F6E56" stroke-width="1.3"/>
+            <path d="M4 12V7a4 4 0 0 1 8 0v5" stroke="#0F6E56" stroke-width="1.3"/>
+          </svg>
+        </div>
+        <div>
+          <div class="section-title">Техніка і звук</div>
+          <div class="section-sub">Найчастіша причина зрупованих сесій</div>
+        </div>
+      </div>
+      <div class="items">
+        <div class="item critical" onclick="toggle(this)" data-id="headphones">
+          <div class="checkbox"><svg class="checkmark" width="12" height="10" viewBox="0 0 12 10"><path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+          <div class="item-body">
+            <div class="item-title">Навушники підключені та перевірені</div>
+            <div class="item-desc">Обов'язково — і закриті, не відкриті вкладиші. Без навушників голос інших учасників повертається у мікрофон і створює ехо, яке робить розмову нечутною для всіх.</div>
+          </div>
+          <span class="critical-badge">критично</span>
+        </div>
+        <div class="item" onclick="toggle(this)" data-id="mic">
+          <div class="checkbox"><svg class="checkmark" width="12" height="10" viewBox="0 0 12 10"><path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+          <div class="item-body">
+            <div class="item-title">Мікрофон перевірено</div>
+            <div class="item-desc">Зробіть тестовий запис або зайдіть на meet.google.com/test. Перевірте, що вас чути чітко і без фону.</div>
+          </div>
+        </div>
+        <div class="item" onclick="toggle(this)" data-id="camera">
+          <div class="checkbox"><svg class="checkmark" width="12" height="10" viewBox="0 0 12 10"><path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+          <div class="item-body">
+            <div class="item-title">Камера включена і працює</div>
+            <div class="item-desc">Симуляція вимагає видимості реакцій. Камера — обов'язкова умова для всіх учасників протягом усієї сесії, не тільки на початку.</div>
+          </div>
+        </div>
+        <div class="item" onclick="toggle(this)" data-id="internet">
+          <div class="checkbox"><svg class="checkmark" width="12" height="10" viewBox="0 0 12 10"><path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+          <div class="item-body">
+            <div class="item-title">Стабільне інтернет-з'єднання</div>
+            <div class="item-desc">Провідне підключення краще за Wi-Fi. Якщо тільки Wi-Fi — сядьте якомога ближче до роутера. Мобільний інтернет як запасний варіант, не основний.</div>
+          </div>
+        </div>
+        <div class="item" onclick="toggle(this)" data-id="browser">
+          <div class="checkbox"><svg class="checkmark" width="12" height="10" viewBox="0 0 12 10"><path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+          <div class="item-body">
+            <div class="item-title">Браузер оновлено, посилання перевірено</div>
+            <div class="item-desc">Chrome або Firefox — найстабільніші. Перейдіть за посиланням сесії заздалегідь і перевірте, що все відкривається. Не Safari на старих пристроях.</div>
+          </div>
+        </div>
+        <div class="item" onclick="toggle(this)" data-id="power">
+          <div class="checkbox"><svg class="checkmark" width="12" height="10" viewBox="0 0 12 10"><path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+          <div class="item-body">
+            <div class="item-title">Ноутбук підключено до зарядки</div>
+            <div class="item-desc">Сесія триває 3–4 години. Відеодзвінок швидко розряджає батарею — підключіть зарядку до початку, не чекайте поки заряд впаде.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2: ПРОСТІР -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:#E6F1FB;">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <rect x="2" y="3" width="12" height="10" rx="1.5" stroke="#185FA5" stroke-width="1.3"/>
+            <path d="M6 3v10M2 7h4" stroke="#185FA5" stroke-width="1.3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div>
+          <div class="section-title">Фізичний простір</div>
+          <div class="section-sub">Середовище впливає на якість рішень</div>
+        </div>
+      </div>
+      <div class="items">
+        <div class="item critical" onclick="toggle(this)" data-id="room">
+          <div class="checkbox"><svg class="checkmark" width="12" height="10" viewBox="0 0 12 10"><path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+          <div class="item-body">
+            <div class="item-title">Окреме приміщення, двері зачинені</div>
+            <div class="item-desc">Вас не повинні чути і ви не повинні чути інших. Якщо живете з сім'єю або колегами — попередьте їх: "Я недоступний від X до Y, навіть якщо виглядає що просто сиджу за ноутом".</div>
+          </div>
+          <span class="critical-badge">критично</span>
+        </div>
+        <div class="item" onclick="toggle(this)" data-id="lighting">
+          <div class="checkbox"><svg class="checkmark" width="12" height="10" viewBox="0 0 12 10"><path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+          <div class="item-body">
+            <div class="item-title">Нормальне освітлення — обличчя видно чітко</div>
+            <div class="item-desc">Джерело світла попереду або збоку — не за спиною (не сидіть спиною до вікна). Якщо обличчя в тіні — фасилітатор не бачить ваших реакцій, що знижує якість дебрифу.</div>
+          </div>
+        </div>
+        <div class="item" onclick="toggle(this)" data-id="background">
+          <div class="checkbox"><svg class="checkmark" width="12" height="10" viewBox="0 0 12 10"><path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+          <div class="item-body">
+            <div class="item-title">Нейтральний фон або без віртуального</div>
+            <div class="item-desc">Уникайте розмитого або анімованого віртуального фону — він відволікає і маскує мову тіла. Реальна стіна або книжкова полиця — ідеально.</div>
+          </div>
+        </div>
+        <div class="item" onclick="toggle(this)" data-id="water">
+          <div class="checkbox"><svg class="checkmark" width="12" height="10" viewBox="0 0 12 10"><path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+          <div class="item-body">
+            <div class="item-title">Вода і перекус поруч</div>
+            <div class="item-desc">Сесія довга. Вставати по воду або їжу під час симуляції — відволікає всіх. Підготуйте все заздалегідь.</div>
+          </div>
+        </div>
+        <div class="item" onclick="toggle(this)" data-id="notepad">
+          <div class="checkbox"><svg class="checkmark" width="12" height="10" viewBox="0 0 12 10"><path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+          <div class="item-body">
+            <div class="item-title">Блокнот і ручка на столі</div>
+            <div class="item-desc">Для нотаток під час симуляції і дебрифу. Паперові нотатки не відволікають увагу так, як відкриті вкладки браузера.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 3: ФОКУС -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:#FAEEDA;">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <circle cx="8" cy="8" r="5.5" stroke="#854F0B" stroke-width="1.3"/>
+            <circle cx="8" cy="8" r="2" stroke="#854F0B" stroke-width="1.3"/>
+            <path d="M8 2.5V1M8 15v-1.5M2.5 8H1M15 8h-1.5" stroke="#854F0B" stroke-width="1.3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div>
+          <div class="section-title">Фокус і присутність</div>
+          <div class="section-sub">Ефект симуляції пропорційний ступеню залученості</div>
+        </div>
+      </div>
+      <div class="items">
+        <div class="item critical" onclick="toggle(this)" data-id="phone">
+          <div class="checkbox"><svg class="checkmark" width="12" height="10" viewBox="0 0 12 10"><path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+          <div class="item-body">
+            <div class="item-title">Телефон відкладено лицем вниз або в іншій кімнаті</div>
+            <div class="item-desc">Не просто беззвучний — відкладено фізично. Повідомлення що з'являється на екрані телефону відволікає на 20+ хвилин навіть якщо ви в нього не заходите. Це науково доведений факт.</div>
+          </div>
+          <span class="critical-badge">критично</span>
+        </div>
+        <div class="item" onclick="toggle(this)" data-id="notifications">
+          <div class="checkbox"><svg class="checkmark" width="12" height="10" viewBox="0 0 12 10"><path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+          <div class="item-body">
+            <div class="item-title">Сповіщення на комп'ютері вимкнено</div>
+            <div class="item-desc">Slack, Teams, пошта, браузерні нотифікації — все вимкнути. На Mac: Фокус → Не турбувати. На Windows: Режим "Не турбувати" в центрі сповіщень.</div>
+          </div>
+        </div>
+        <div class="item" onclick="toggle(this)" data-id="tabs">
+          <div class="checkbox"><svg class="checkmark" width="12" height="10" viewBox="0 0 12 10"><path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+          <div class="item-body">
+            <div class="item-title">Зайві вкладки браузера закрито</div>
+            <div class="item-desc">Залиште тільки вкладку із сесією. Відкрита пошта або новини — запрошення до відволікання. Якщо буде потрібно щось знайти — фасилітатор скаже.</div>
+          </div>
+        </div>
+        <div class="item" onclick="toggle(this)" data-id="calendar">
+          <div class="checkbox"><svg class="checkmark" width="12" height="10" viewBox="0 0 12 10"><path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+          <div class="item-body">
+            <div class="item-title">Час у календарі заблоковано з запасом</div>
+            <div class="item-desc">Заблокуйте +30 хвилин після запланованого закінчення. Сесія може затягнутись під час дебрифу — це нормально і означає що щось важливе відбувається.</div>
+          </div>
+        </div>
+        <div class="item" onclick="toggle(this)" data-id="colleagues">
+          <div class="checkbox"><svg class="checkmark" width="12" height="10" viewBox="0 0 12 10"><path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+          <div class="item-body">
+            <div class="item-title">Колеги знають що ви недоступні</div>
+            <div class="item-desc">Поставте статус "Недоступний" у робочих чатах. Якщо очікуєте термінових питань — делегуйте хтось до початку сесії.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 4: СТАН -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon" style="background:#EEEDFE;">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M8 2C5.8 2 4 3.8 4 6c0 1.5.8 2.8 2 3.5V11h4V9.5c1.2-.7 2-2 2-3.5 0-2.2-1.8-4-4-4z" stroke="#534AB7" stroke-width="1.3" stroke-linejoin="round"/>
+            <path d="M6 11h4v1.5a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V11z" stroke="#534AB7" stroke-width="1.3"/>
+          </svg>
+        </div>
+        <div>
+          <div class="section-title">Ваш стан</div>
+          <div class="section-sub">Симуляція показує вас реальними — це і є мета</div>
+        </div>
+      </div>
+      <div class="items">
+        <div class="item" onclick="toggle(this)" data-id="meal">
+          <div class="checkbox"><svg class="checkmark" width="12" height="10" viewBox="0 0 12 10"><path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+          <div class="item-body">
+            <div class="item-title">Поїли до початку</div>
+            <div class="item-desc">Голодний мозок приймає гірші рішення — і це буде видно у симуляції. Не їжте під час сесії — відволікає і виглядає неповажно.</div>
+          </div>
+        </div>
+        <div class="item" onclick="toggle(this)" data-id="mindset">
+          <div class="checkbox"><svg class="checkmark" width="12" height="10" viewBox="0 0 12 10"><path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+          <div class="item-body">
+            <div class="item-title">5 хвилин тиші перед початком</div>
+            <div class="item-desc">Не заходьте на сесію прямо з іншого дзвінку або зустрічі. Дайте собі 5 хвилин перемкнутись. Симуляція вимагає повної присутності — не "паралельного режиму".</div>
+          </div>
+        </div>
+        <div class="item" onclick="toggle(this)" data-id="expectations">
+          <div class="checkbox"><svg class="checkmark" width="12" height="10" viewBox="0 0 12 10"><path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></div>
+          <div class="item-body">
+            <div class="item-title">Немає очікування "правильних відповідей"</div>
+            <div class="item-desc">Тут немає правильного способу "зіграти добре". Чим відкритіше ви дієте — тим ціннішим буде дебриф. Ваша задача — не виграти, а діяти.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="done-state" id="doneState">
+    <div class="done-icon">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <path d="M5 14l6 6L23 8" stroke="#1D9E75" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="done-title">Все готово.</div>
+    <div class="done-sub">Ви підготовлені для максимального ефекту від сесії. До зустрічі.</div>
+    <button class="done-reset" onclick="resetAll()">Скинути і пройти знову</button>
+  </div>
+
+</main>
+
+<footer>Leadership Simulation Lab · Олександр Тріфан · Конфіденційно</footer>
+
+<script>
+const STORAGE_KEY = 'lsl_checklist_v1';
+
+function getState() {
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+  } catch { return {}; }
+}
+function saveState(state) {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch {}
+}
+
+function toggle(el) {
+  const id = el.dataset.id;
+  el.classList.toggle('checked');
+  const state = getState();
+  state[id] = el.classList.contains('checked');
+  saveState(state);
+  updateProgress();
+}
+
+function updateProgress() {
+  const items = document.querySelectorAll('.item');
+  const checked = document.querySelectorAll('.item.checked');
+  const total = items.length;
+  const done = checked.length;
+  const pct = total ? Math.round((done / total) * 100) : 0;
+
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = pct + '%';
+  document.getElementById('doneCount').textContent = done;
+  document.getElementById('totalCount').textContent = total;
+
+  const doneState = document.getElementById('doneState');
+  const checklist = document.getElementById('checklist');
+  if (done === total && total > 0) {
+    checklist.style.display = 'none';
+    doneState.classList.add('show');
+    document.querySelector('.progress-bar-wrap').style.display = 'none';
+    document.querySelector('.warning-box').style.display = 'none';
+  } else {
+    checklist.style.display = 'block';
+    doneState.classList.remove('show');
+    document.querySelector('.progress-bar-wrap').style.display = 'block';
+    document.querySelector('.warning-box').style.display = 'flex';
+  }
+}
+
+function resetAll() {
+  saveState({});
+  document.querySelectorAll('.item').forEach(el => el.classList.remove('checked'));
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function restoreState() {
+  const state = getState();
+  document.querySelectorAll('.item').forEach(el => {
+    if (state[el.dataset.id]) el.classList.add('checked');
+  });
+  updateProgress();
+}
+
+restoreState();
+</script>
+</body>
+</html>
